@@ -1,0 +1,20 @@
+
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h1>Adicionar Membro</h1>
+        <form class="form-with-validation" action="{% url 'Clubs:add' club_id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %} 
+            {{ form }}
+            <h1>
+                <button class="form-submit">Adicionar</button>
+            </h1>
+        </form>
+    </section>
+{% endblock %}
+

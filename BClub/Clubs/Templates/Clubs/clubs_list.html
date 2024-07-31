@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Clubs
+{% endblock %}
+{% block Nclub %}
+        <a href= "{% url 'Clubs:new' %}">
+            <span aria-label="Postar novo">Criar novo Club</span>
+        </a> 
+        {% endblock  %}
+{% block content %}
+    <section>
+    <h1 class="post">Clubes</h1>
+
+    {% for club in Clubs %}
+        <article class="post">
+            <h2 >
+                <a href="{%  url 'Clubs:page' club_id=club.club_id %}">
+                    <p>{[[[livro atual do clube]]]}</p>
+                </a>
+            <p>Nome do clube:{{ club.club_name }}</p>
+            <p>Admin:{{ club.club_admin }}</p>
+            <p>Criado hein:{{ club.created_at }}</p>
+            </h2>
+        </article>
+    {% endfor %}
+</section>
+{% endblock %}
+

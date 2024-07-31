@@ -1,0 +1,31 @@
+
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h2 >
+            <a>
+                <p>{[[[livro atual do clube]]]}</p>
+            </a>
+            
+        <p>id do club:{{ Club.club_id }}</p>
+        <p>Nome do clube:{{ Club.club_name }}</p>
+        <p>Admin:{{ Club.club_admin }}</p>
+        <p>Criado hein:{{ Club.created_at }}</p>
+        <p>MEMBROS:</p>
+        {% for member in Members %}
+            {% for item in member %}
+                <p>Membro:{{ item.member_name }}</p>        
+            {% endfor %}      
+        {% endfor %}
+        <a class="form-submit" href="{%  url 'Clubs:add' club_id=Club.club_id %}">
+            <p>{ADICIONAR NOVO MEMBRO}</p>
+        </a>
+        </h2>
+    </section>
+{% endblock %}
+

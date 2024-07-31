@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}   
+    <h1>Bem vindo!!!</h1>
+    <P>Bclub v1.0</p>
+{% endblock  %}
+
+{% block LSC %}
+<form  class="logout" action={% url "Members:logout" %} method="POST">
+    {% csrf_token %}
+    <button class="logout-button">Logout</button>
+</form>
+{% endblock %}

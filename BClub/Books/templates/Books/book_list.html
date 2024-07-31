@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Posts
+{% endblock %}
+
+{% block content %}
+    <section>
+    <h1 class="post">Books</h1>
+
+    {% for book in Books %}
+        <article class="post">
+            <h2>
+                <a href="{%  url 'Books:page' book_id=book.book_id %}">
+                <img class="banner" src="{{ book.book_cover.url }}">
+                </a>
+            <p>{{ book.book_title }}</p>
+            <p>{{ book.book_author }}</p>
+            <p>{{ book.book_rating }}</p>
+            </h2>
+        </article>
+    {% endfor %}
+</section>
+{% endblock %}
+

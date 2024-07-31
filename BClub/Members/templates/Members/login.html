@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        PAGINA DE LOGIN
+    </title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/main.js' %}" defer></script>
+</head>
+<body>
+    <main>
+        <div>
+            Login de Usuario
+        <form class="form-with-validation" action="/Members/login/" method="post">
+            {% csrf_token %}
+            {{form}}
+            {% if request.GET.next %}
+                <input type="hidden" name="next" value={{request.GET.next}}>
+            {% endif %}
+            <h1>
+                <button >Logar</button>
+                <button><a href="{% url 'Members:register' %}">Criar conta</a></button>
+            </h1>
+        </form>
+        </div>
+        
+    </main>
+</body>
+</html>
