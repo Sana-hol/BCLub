@@ -1,5 +1,6 @@
 
 import time
+from django.contrib import messages
 from django.db.models import F
 from django.shortcuts import render, redirect
 from Members.models import Members
@@ -39,6 +40,20 @@ def add_member(request, club_id):
     else:
         form = forms.CreateClubRelationsAddMembers()
     return render(request, 'Clubs/add_member.html', {'form': form , 'club_id':club_id })
+
+@login_required(login_url = '/Members/login')
+def manage_club(request, club_id):
+    Club = Clubs.objects.get(club_id = club_id)
+    print(request.user.username)
+    if request.user == Club.club_admin:
+        print('sucess')
+        return render(request, 'Clubs/club_manage.html' , {'club_id':club_id })
+    else:
+        print('fail')
+        messages.success(request, "Você não é o adm desse clube!!!!")
+        return redirect('Clubs:page', club_id )
+    
+    
 
 @login_required(login_url = '/Members/login')
 def club_new(request): 

@@ -3,11 +3,11 @@ from django.contrib.auth.models import User
 
 class Books(models.Model):
     book_id = models.AutoField(primary_key=True)
-    book_cover = models.CharField(blank=True, null=True)
+    book_cover = models.ImageField(blank=True, null=True)
     book_title = models.CharField()
     book_author = models.CharField()
     book_rating = models.IntegerField(blank=True, null=True)
-    total_size = models.IntegerField(blank=True, null=True)
+    total_size = models.IntegerField(default= 1000, blank=True, null=True)
 
     class Meta:
         db_table = 'Books'

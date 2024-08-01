@@ -10,7 +10,15 @@
         {% endblock %}
     </title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script src="{% static 'js/main.js' %}" defer></script>
+    
+    {% if messages %}
+            {% for message in messages %}
+                {% if message.tags %}  
+                    <script>alert(' {{ message }} ')</script> 
+                {% endif %}
+
+            {% endfor %}
+    {% endif %}
 </head>
 <body>
     <nav>
@@ -32,6 +40,7 @@
                 </form>
         {% endblock %}
     </nav>
+    
     <main>
         {% block content %}
         {% endblock %}
