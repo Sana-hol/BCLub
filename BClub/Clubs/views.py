@@ -3,6 +3,7 @@ import time
 from django.contrib import messages
 from django.db.models import F
 from django.shortcuts import render, redirect
+from Books.models import Books
 from Members.models import Members
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import ClubStatus, Clubs
@@ -40,6 +41,24 @@ def add_member(request, club_id):
     else:
         form = forms.CreateClubRelationsAddMembers()
     return render(request, 'Clubs/add_member.html', {'form': form , 'club_id':club_id })
+
+@login_required(login_url = '/Members/login')
+def set_book(request, club_id):
+    currentclub = Clubs.objects.get(club_id = club_id)
+    currentclubinitialsprogress = Clubs.objects.filter(club_id = club_id).values('current_progress')[0]
+    currentbookinclub = Clubs.objects.get(club_id = club_id).current_book
+    currentbook = Books.objects.filter(book_id = currentbookinclub.book_id).values(current_book=F('book_title'))[0]
+    currentclubinitials = currentbook | currentclubinitialsprogress
+    print(currentclubinitials)
+    form = forms.SetBook(request.POST or None, instance=currentclub, initial = currentclubinitials)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('Clubs:page', club_id )
+        else:
+            print(form.errors)
+    return render(request, 'Clubs/set_book.html', {'form': form, 'club_id':club_id})
+
 
 @login_required(login_url = '/Members/login')
 def manage_club(request, club_id):
