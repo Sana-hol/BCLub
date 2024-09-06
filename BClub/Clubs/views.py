@@ -63,7 +63,6 @@ def set_book(request, club_id):
 @login_required(login_url = '/Members/login')
 def manage_club(request, club_id):
     Club = Clubs.objects.get(club_id = club_id)
-    print(request.user.username)
     if request.user == Club.club_admin:
         print('sucess')
         return render(request, 'Clubs/club_manage.html' , {'club_id':club_id })
