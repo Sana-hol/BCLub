@@ -10,8 +10,8 @@ from Books.models import Books
 class Clubs(models.Model):
     club_id = models.AutoField(primary_key=True)
     club_name = models.CharField()
-    club_admin = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None)
-    current_book = models.ForeignKey(Books, on_delete=models.SET_DEFAULT, default=1)
+    club_admin = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+    current_book = models.ForeignKey(Books, on_delete=models.SET_NULL, null=True)
     current_progress = models.IntegerField( default=1)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -20,7 +20,7 @@ class Clubs(models.Model):
         
 class ClubStatus(models.Model):
     id = models.AutoField(primary_key=True)
-    club = models.ForeignKey(Clubs, default=1, on_delete=models.CASCADE, blank=True)
+    club = models.ForeignKey(Clubs, default=1, on_delete=models.SET_DEFAULT, blank=True)
     member = models.ForeignKey(Members, on_delete=models.CASCADE, blank=True)
     club_status = models.IntegerField(default=1)
 

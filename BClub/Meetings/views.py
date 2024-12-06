@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from Books.models import Books
 from Members.models import Members
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import ClubStatus, Clubs
+from .models import Clubs
 from django.contrib.auth.decorators import login_required
 from . import forms
 
