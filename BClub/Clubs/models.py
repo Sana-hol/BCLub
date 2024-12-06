@@ -10,7 +10,7 @@ from Books.models import Books
 class Clubs(models.Model):
     club_id = models.AutoField(primary_key=True)
     club_name = models.CharField()
-    club_admin = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+    club_admin = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, null=True)
     current_book = models.ForeignKey(Books, on_delete=models.SET_NULL, null=True)
     current_progress = models.IntegerField( default=1)
     created_at = models.DateTimeField(auto_now_add=True)
